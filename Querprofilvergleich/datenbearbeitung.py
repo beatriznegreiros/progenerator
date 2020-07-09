@@ -6,10 +6,10 @@ from pathlib import Path
 current_dir = Path.cwd()
 
 # ------------- INPUT (without extension of file) -------------------
-list_of_profiles = ['Inn_Profile_2014', 'QP_2007_Fkm']  # Profiles must be in same folder
+list_of_profiles = ['Inn_Profile_2014', 'QP_2007_Fkm', 'Inn_Querprofile_2020_final']  # Profiles must be in same folder
 
 # (km section, lat, long, bed elevation) obs.: first column is always 0
-output_folder = str(current_dir) + '/' + 'Inn_Profiles'
+output_folder = str(current_dir) + '/' + 'Inn_Profiles_with2020'
 # -------------------------------------------------------------------
 
 # Create folder if it doesnt exist
