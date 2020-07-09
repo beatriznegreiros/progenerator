@@ -6,10 +6,10 @@ from pathlib import Path
 current_dir = Path.cwd()
 
 # ------------- INPUT (without extension of file) -------------------
-list_of_profiles = ['Inn_Profile_2014', 'QP_2007_Fkm', 'Inn_Querprofile_2020_final']  # Profiles must be in same folder
+list_of_profiles = ['Inn_Profile_2014', 'QP_2007_Fkm', 'Querprofile_2020_final']  # Profiles must be in same folder
 
 # (km section, lat, long, bed elevation) obs.: first column is always 0
-output_folder = str(current_dir) + '/' + 'Inn_Profiles_with2020'
+output_folder = str(current_dir) + '/' + 'Inn_Profiles_2014_2007_2020'
 # -------------------------------------------------------------------
 
 # Create folder if it doesnt exist
@@ -79,7 +79,7 @@ for sec in stamm_profiles:
 
             plt.legend(loc='upper center')
 
-            plt.scatter(references, reference_banks.bedelevation, marker="^", edgecolors='c', label='Stamm Punkte')
+            #plt.scatter(references, reference_banks.bedelevation, marker="^", edgecolors='c', label='Stamm Punkte')
 
         except:  # skips the plot if the section doesnt exist
             print("Could not save plot for ", _file, " in km section ", sec)
@@ -88,6 +88,8 @@ for sec in stamm_profiles:
     # Get title and path of the section figure
     integer, decimal = split_float(sec)
     title = 'Cross section of km ' + str(sec)
+    plt.xlabel('Distance from left bank [m]')
+    plt.ylabel('Elevation [m.a.s.l]')
     plt.title(title)
     out = output_folder + '/' + 'km_' + str(integer) + '_' + str(decimal)
 
