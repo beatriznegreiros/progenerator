@@ -8,6 +8,9 @@ current_dir = Path.cwd()
 # ------------- INPUT (without extension of file) -------------------
 list_of_profiles = ['Inn_Profile_2014', 'QP_2007_Fkm', 'Querprofile_2020_final']  # Profiles must be in same folder
 
+markersize = [8, 4, 0]  # corresponding to the respective profiles
+marker = [".", "^", "."]  # corresponding to the respective profiles
+
 # (km section, lat, long, bed elevation) obs.: first column is always 0
 output_folder = str(current_dir) + '/' + 'Inn_Profiles_2014_2007_2020'
 # -------------------------------------------------------------------
@@ -39,6 +42,7 @@ stamm_profiles = corners.index.drop_duplicates()
 
 # Iterates through km sections
 for sec in stamm_profiles:
+    i=0
     for _file in list_of_profiles:
         path_profile = str(current_dir) + '/' + _file + '.csv'
 
@@ -74,15 +78,16 @@ for sec in stamm_profiles:
             references = abs(references - references[0])
 
             # Plots the km section
-            plt.plot(distances, points_in_section.bedelevation, marker=".",
-                     markerfacecolor='blue', markersize=8, label=_file)
+            plt.plot(distances, points_in_section.bedelevation, marker=marker[i],
+                     markerfacecolor='black', markersize=markersize[i], label=_file)
 
             plt.legend(loc='upper center')
 
-            #plt.scatter(references, reference_banks.bedelevation, marker="^", edgecolors='c', label='Stamm Punkte')
-
+            # plt.scatter(references, reference_banks.bedelevation, marker="^", edgecolors='c', label='Stamm Punkte')
+            i +=1
         except:  # skips the plot if the section doesnt exist
-            print("Could not save plot for ", _file, " in km section ", sec)
+            message = "Could not save plot for " + _file + " in km section " + str(sec)
+            print(message)
             pass
 
     # Get title and path of the section figure
