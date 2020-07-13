@@ -7,17 +7,18 @@ current_dir = Path.cwd()
 
 # ------------- INPUT (without extension of file) -------------------
 list_of_profiles = ['Inn_Profile_2014', 'QP_2007_Fkm', 'Querprofile_2020_final']  # Profiles must be in same folder
-
+bank_limits = 'Inn_Stamm_2014'
 markersize = [8, 4, 0]  # corresponding to the respective profiles
 marker = [".", "^", "."]  # corresponding to the respective profiles
-
 # (km section, lat, long, bed elevation) obs.: first column is always 0
-output_folder = str(current_dir) + '/' + 'Inn_Profiles_2014_2007_2020'
+
+name_output_folder = 'Inn_Profiles_2014_2007_2020'
+
 # -------------------------------------------------------------------
+output_folder = str(current_dir) + '/' + name_output_folder
 
 # Create folder if it doesnt exist
 Path(output_folder).mkdir(exist_ok=True)
-
 
 # Practical Routines
 def rename_columns(df):
@@ -32,7 +33,7 @@ def split_float(x):
 
 
 # Read Stamm punkte
-path_banks = str(current_dir) + '/' + 'Inn_Stamm_2014.csv'  # Path to stamm punkte
+path_banks = str(current_dir) + '/' + bank_limits + '.csv'  # Path to stamm punkte
 corners = pd.read_csv(path_banks, skip_blank_lines=True, index_col=0, header=None)
 corners.dropna(how='any', inplace=True, axis=0)
 corners = rename_columns(corners)  # Standardize columns names
