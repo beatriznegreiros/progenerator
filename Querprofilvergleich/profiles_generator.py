@@ -20,6 +20,7 @@ output_folder = str(current_dir) + '/' + name_output_folder
 # Create folder if it doesnt exist
 Path(output_folder).mkdir(exist_ok=True)
 
+
 # Practical Routines
 def rename_columns(df):
     header = {df.columns[0]: 'lat', df.columns[1]: 'long', df.columns[2]: 'bedelevation'}
@@ -43,7 +44,7 @@ stamm_profiles = corners.index.drop_duplicates()
 
 # Iterates through km sections
 for sec in stamm_profiles:
-    i=0
+    i = 0
     for _file in list_of_profiles:
         path_profile = str(current_dir) + '/' + _file + '.csv'
 
@@ -66,26 +67,27 @@ for sec in stamm_profiles:
             distances = (points_in_section.lat ** 2 + points_in_section.long ** 2) ** 0.5
             references = np.array((reference_banks.lat ** 2 + reference_banks.long ** 2) ** 0.5)
 
-            # Boolan array to take only points inside the stamm punkte
+            # Boolean array to take only points inside the stamm punkte
             isinside = (distances <= references[1]) & (distances >= references[0]) | ((distances <= references[0])
                                                                                       & (distances >= references[1]))
 
             # Re-assign dataframes to take only points inside stammpunkte
-            distances = distances[isinside]
             points_in_section = points_in_section[isinside]
 
             # Calculates the relative distance of the bathymetry having as reference point the left bank
-            distances = abs(distances - references[0])
-            references = abs(references - references[0])
+            plot_distances = abs(((points_in_section.lat - reference_banks['lat'].iloc[0]) ** 2 + (points_in_section.long - reference_banks['long'].iloc[0]) ** 2) ** 0.5)
+
+            # plot_references[0] = 0
+            # plot_references[1] = ((reference_banks[1].lat - reference_banks[0].lat)**2 + (reference_banks[1].long - reference_banks[0].long)**2)**0.5
 
             # Plots the km section
-            plt.plot(distances, points_in_section.bedelevation, marker=marker[i],
+            plt.plot(plot_distances, points_in_section.bedelevation, marker=marker[i],
                      markerfacecolor='black', markersize=markersize[i], label=_file)
 
             plt.legend(loc='upper center')
 
             # plt.scatter(references, reference_banks.bedelevation, marker="^", edgecolors='c', label='Stamm Punkte')
-            i +=1
+            i += 1
         except:  # skips the plot if the section doesnt exist
             message = "Could not save plot for " + _file + " in km section " + str(sec)
             print(message)
