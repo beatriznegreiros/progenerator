@@ -14,7 +14,7 @@ The module ``profiles_generator.py`` can plot hundreds of profiles automatically
 	- 4th column: Bed elevation
 
 
-## User's manual
+## Quick start:
 
 The safest way to use ``progenerator`` is to clone this GitHub repository and open the file ``profiles_generator``, there
 you will find a code block with name INPUT.
