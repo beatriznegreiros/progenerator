@@ -8,13 +8,14 @@ current_dir = Path.cwd()
 # ------------- INPUT (without extension of file) -------------------
 list_of_profiles = ['Inn_Profile_2014', 'QP_2007_Fkm', 'Querprofile_2020_final']  # Profiles must be in same folder
 bank_limits = 'Inn_Stamm_2014'
+# Above files must be in the format: (km section, lat, long, bed elevation) obs.: first column is always 0
+titles = ['Bed elevation at 2014', 'Bed elevation at 2007', 'Bed elevation at 2020']
+header = None
 markersize = [8, 4, 0]  # corresponding to the respective profiles
 marker = [".", "^", "."]  # corresponding to the respective profiles
-# (km section, lat, long, bed elevation) obs.: first column is always 0
-
 name_output_folder = 'Inn_Profiles_2014_2007_2020'
-
 # -------------------------------------------------------------------
+
 output_folder = str(current_dir) + '/' + name_output_folder
 
 # Create folder if it doesnt exist
@@ -35,7 +36,7 @@ def split_float(x):
 
 # Read Stamm punkte
 path_banks = str(current_dir) + '/' + bank_limits + '.csv'  # Path to stamm punkte
-corners = pd.read_csv(path_banks, skip_blank_lines=True, index_col=0, header=None)
+corners = pd.read_csv(path_banks, skip_blank_lines=True, index_col=0, header=header)
 corners.dropna(how='any', inplace=True, axis=0)
 corners = rename_columns(corners)  # Standardize columns names
 
@@ -52,7 +53,7 @@ for sec in stamm_profiles:
         reference_banks = corners.loc[sec]
 
         # Read the DataFrame
-        profile = pd.read_csv(path_profile, skip_blank_lines=True, index_col=0, header=None)
+        profile = pd.read_csv(path_profile, skip_blank_lines=True, index_col=0, header=header)
         profile.dropna(how='any', inplace=True, axis=0)
 
         # Standardize the columns
@@ -77,12 +78,9 @@ for sec in stamm_profiles:
             # Calculates the relative distance of the bathymetry having as reference point the left bank
             plot_distances = abs(((points_in_section.lat - reference_banks['lat'].iloc[0]) ** 2 + (points_in_section.long - reference_banks['long'].iloc[0]) ** 2) ** 0.5)
 
-            # plot_references[0] = 0
-            # plot_references[1] = ((reference_banks[1].lat - reference_banks[0].lat)**2 + (reference_banks[1].long - reference_banks[0].long)**2)**0.5
-
             # Plots the km section
             plt.plot(plot_distances, points_in_section.bedelevation, marker=marker[i],
-                     markerfacecolor='black', markersize=markersize[i], label=_file)
+                     markerfacecolor='black', markersize=markersize[i], label=titles[i])
 
             plt.legend(loc='upper center')
 
