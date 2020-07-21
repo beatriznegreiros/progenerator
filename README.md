@@ -31,7 +31,7 @@ created inside the current directory.
 - Note: If your files have headers either delete it or entry it at the variable ``header`` at the INPUT block.
 
 	
-## Necessary packages
+## Dependencies
 The following packages are dependencies of this repository:
 - numpy
 - pandas
