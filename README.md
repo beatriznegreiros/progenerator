@@ -31,4 +31,13 @@ created inside the current directory.
 - Note: If your files have headers either delete it or entry it at the variable ``header`` at the INPUT block.
 
 	
-	
+## Necessary packages
+The following packages are dependencies of this repository:
+- numpy
+- pandas
+- matplotlib
+- pathlib
+
+Navigate with ``anaconda prompt`` to the the cloned repository and type ``conda env create -f environment.yml`` to create a conda environment with the above necessary packages.
+
+

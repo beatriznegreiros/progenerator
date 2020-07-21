@@ -1,0 +1,10 @@
+name: env-progenerator
+channels:
+  - anaconda
+  - conda-forge
+  - defaults
+dependencies:
+  - numpy
+  - pandas
+  - matplotlib
+  - pathlib
