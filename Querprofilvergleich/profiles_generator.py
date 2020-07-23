@@ -6,14 +6,14 @@ from pathlib import Path
 current_dir = Path.cwd()
 
 # ------------- INPUT (without extension of file) -------------------
-list_of_profiles = ['Inn_Profile_2014', 'QP_2007_Fkm', 'Querprofile_2020_final']  # Profiles must be in same folder
+list_of_profiles = ['Profiles_Mesh_2007', 'QP_2007_Fkm']  # Profiles must be in same folder
 bank_limits = 'Inn_Stamm_2014'
 # Above files must be in the format: (km section, lat, long, bed elevation) obs.: first column is always 0
-titles = ['Bed elevation at 2014', 'Bed elevation at 2007', 'Bed elevation at 2020']
+titles = ['Bed elevation at 2007 (Mesh)', 'Bed elevation at 2007 (Measurements)']
 header = None
 markersize = [8, 4, 0]  # corresponding to the respective profiles
 marker = [".", "^", "."]  # corresponding to the respective profiles
-name_output_folder = 'Inn_Profiles_2014_2007_2020'
+name_output_folder = 'Inn_Profiles_2007_mesh_vs_meas'
 # -------------------------------------------------------------------
 
 output_folder = str(current_dir) + '/' + name_output_folder
