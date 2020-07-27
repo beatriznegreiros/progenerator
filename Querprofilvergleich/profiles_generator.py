@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from pathlib import Path
+import matplotlib.ticker as ticker
 
 current_dir = Path.cwd()
 
@@ -14,6 +15,8 @@ header = None
 markersize = [8, 4, 0]  # corresponding to the respective profiles
 marker = [".", "^", "."]  # corresponding to the respective profiles
 name_output_folder = 'Inn_Profiles_2007_mesh_vs_meas'
+xspacing = 20
+yspacing = 1
 # -------------------------------------------------------------------
 
 output_folder = str(current_dir) + '/' + name_output_folder
@@ -46,6 +49,8 @@ stamm_profiles = corners.index.drop_duplicates()
 # Iterates through km sections
 for sec in stamm_profiles:
     i = 0
+    f, ax = plt.subplots(figsize=(10, 6))
+
     for _file in list_of_profiles:
         path_profile = str(current_dir) + '/' + _file + '.csv'
 
@@ -76,13 +81,16 @@ for sec in stamm_profiles:
             points_in_section = points_in_section[isinside]
 
             # Calculates the relative distance of the bathymetry having as reference point the left bank
-            plot_distances = abs(((points_in_section.lat - reference_banks['lat'].iloc[0]) ** 2 + (points_in_section.long - reference_banks['long'].iloc[0]) ** 2) ** 0.5)
+            plot_distances = abs(((points_in_section.lat - reference_banks['lat'].iloc[0]) ** 2 + (
+                        points_in_section.long - reference_banks['long'].iloc[0]) ** 2) ** 0.5)
 
             # Plots the km section
-            plt.plot(plot_distances, points_in_section.bedelevation, marker=marker[i],
-                     markerfacecolor='black', markersize=markersize[i], label=titles[i])
+            ax.plot(plot_distances, points_in_section.bedelevation, marker=marker[i],
+                    markerfacecolor='black', markersize=markersize[i], label=titles[i])
 
-            plt.legend(loc='upper center')
+            ax.legend(loc='upper center')
+            ax.xaxis.set_major_locator(ticker.MultipleLocator(xspacing))
+            ax.yaxis.set_major_locator(ticker.MultipleLocator(yspacing))
 
             # plt.scatter(references, reference_banks.bedelevation, marker="^", edgecolors='c', label='Stamm Punkte')
             i += 1
@@ -93,12 +101,13 @@ for sec in stamm_profiles:
 
     # Get title and path of the section figure
     integer, decimal = split_float(sec)
-    title = 'Cross section of km ' + str(sec)
-    plt.xlabel('Distance from left bank [m]')
-    plt.ylabel('Elevation [m.a.s.l]')
-    plt.title(title)
+    ax.tick_params(axis='both', labelsize='large')
+    ax.set_xlabel(xlabel='Distance from left bank [m]')
+    ax.set_ylabel(ylabel='Elevation [m.a.s.l]')
+    #ax.tick_params(axis='x', width=20)
+    ax.set_title(label='Cross section of km ' + str(sec))
     out = output_folder + '/' + 'km_' + str(integer) + '_' + str(decimal)
 
     # Save figure
-    plt.savefig(out)
+    f.savefig(out)
     plt.clf()
