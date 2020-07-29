@@ -109,7 +109,7 @@ def profiles_generator(path_banks, list_of_profiles, header, markersize, marker,
 if __name__ == '__main__':
     current_dir = Path.cwd()
 
-    # ------------- INPUT (without extension of file) -------------------
+    # ------------- INPUT ----------------------------------------------------
 
     # Path for the profiles to be plotted
     # (km section, lat, long, bed elevation) obs.: first column is always 0
