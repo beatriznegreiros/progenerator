@@ -17,7 +17,7 @@ def split_float(x):
     return int(before), (int(after) * 10 if len(after) == 1 else int(after))
 
 
-def profiles_generator(path_banks, list_of_profiles, header, markersize, marker, xspacing, yspacing, output_folder):
+def profiles_generator(path_banks, list_of_profiles, header, markersize, marker, xspacing, yspacing, titles, output_folder):
     """
     :param path_banks: str, text file in *.csv format, file which delimits the points inside a river profile
     :param list_of_profiles: list of str, text files in *.csv format for the profiles to be generated
@@ -26,8 +26,9 @@ def profiles_generator(path_banks, list_of_profiles, header, markersize, marker,
     :param marker: list of str, markers to the respective profiles
     :param xspacing: float of int, spacing for the x labels
     :param yspacing: float of int, spacing for the y labels
+    :param titles: list of str, titles as identifiers for each dataset appering in the plots
     :param output_folder: folder to which save the generated images
-    
+
     :output: saves images of every section for all list_of_profiles
     """
 
@@ -120,7 +121,7 @@ if __name__ == '__main__':
     bank_limits = str(current_dir) + '/' + 'Inn_Stamm_2014' + '.csv'
 
     # Titles of the legend in the plots
-    titles = ['Bed elevation at 2007 (Mesh)', 'Bed elevation at 2007 (Measurements)']
+    title_list = ['Bed elevation at 2007 (Mesh)', 'Bed elevation at 2007 (Measurements)']
 
     # Spacing for the x labels
     xspacing = 20  # every 20 m
@@ -140,4 +141,4 @@ if __name__ == '__main__':
     # Create folder if it doesnt exist
     Path(output_folder).mkdir(exist_ok=True)
 
-    profiles_generator(bank_limits, profiles, header, markersize, marker, xspacing, yspacing, output_folder)
+    profiles_generator(bank_limits, profiles, header, markersize, marker, xspacing, yspacing, title_list, output_folder)

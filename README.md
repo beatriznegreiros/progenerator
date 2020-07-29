@@ -16,19 +16,19 @@ The module ``profiles_generator.py`` can plot hundreds of profiles automatically
 
 ## Quick start
 
-The safest way to use ``progenerator`` is to clone this GitHub repository and open the file ``profiles_generator``, there
-you will find a code block with name INPUT.
+The easiest way to use ``progenerator`` is to clone this GitHub repository and open the standalone code ``progenerator.py``; the method profiles_generator takes as input the following:
 
+- In ``path_banks`` insert the name of the file which contains the points of the right and left banks.
 - In ``list_of_profiles`` insert the name of the files which you want to be part of the sections plots. Important: leave out
 the file extension. Please note: the files should be in the same folder as the code.
-- In ``bank_limits`` insert the name of the file which contains the points of the right and left banks.
-- At the list ``titles`` one can insert the identifier to each respective data set (it will appear on the final plots)
+- Note: If your files have headers either delete it or entry it at the variable ``header`` at the INPUT block.
 - In ``marker_size`` insert the size of the markers of each of the respective files
 - For plotting with different marker types, change the list ``marker`` accoridng to your preferences. Marker types can be 
 found [here](https://matplotlib.org/3.1.1/api/markers_api.html)
+- ``x-`` and ``yspacing`` can be float of int; they are the spacing for the x and y labels.
+- At the argument ``titles`` one can insert the identifier to each respective data set (it will appear on the final plots)
 - Finally, choose the name of the folder which will store all profile images in ``name_output_folder``. The folder will be automatically
 created inside the current directory.
-- Note: If your files have headers either delete it or entry it at the variable ``header`` at the INPUT block.
 
 	
 ## Dependencies
