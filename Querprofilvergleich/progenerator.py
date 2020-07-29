@@ -18,6 +18,19 @@ def split_float(x):
 
 
 def profiles_generator(path_banks, list_of_profiles, header, markersize, marker, xspacing, yspacing, output_folder):
+    """
+    :param path_banks: str, text file in *.csv format, file which delimits the points inside a river profile
+    :param list_of_profiles: list of str, text files in *.csv format for the profiles to be generated
+    :param header: None or integer, number of lines where the input data has headers
+    :param markersize: list of str, markersizes to the respective profiles
+    :param marker: list of str, markers to the respective profiles
+    :param xspacing: float of int, spacing for the x labels
+    :param yspacing: float of int, spacing for the y labels
+    :param output_folder: folder to which save the generated images
+    
+    :output: saves images of every section for all list_of_profiles
+    """
+
     corners = pd.read_csv(path_banks, skip_blank_lines=True, index_col=0, header=None)
     corners.dropna(how='any', inplace=True, axis=0)
     corners = rename_columns(corners)  # Standardize columns names
