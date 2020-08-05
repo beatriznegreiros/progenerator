@@ -17,17 +17,17 @@ def split_float(x):
     return int(before), (int(after) * 10 if len(after) == 1 else int(after))
 
 
-def profiles_generator(path_banks, list_of_profiles, header, markersize, marker, xspacing, yspacing, titles, output_folder):
+def profiles_generator(path_banks, list_of_profiles, header, markersize, marker, titles, output_folder, **kwargs):
     """
     :param path_banks: str, text file in *.csv format, file which delimits the points inside a river profile
     :param list_of_profiles: list of str, text files in *.csv format for the profiles to be generated
     :param header: None or integer, number of lines where the input data has headers
     :param markersize: list of str, markersizes to the respective profiles
     :param marker: list of str, markers to the respective profiles
-    :param xspacing: float of int, spacing for the x labels
-    :param yspacing: float of int, spacing for the y labels
     :param titles: list of str, titles as identifiers for each dataset appering in the plots
     :param output_folder: folder to which save the generated images
+    :kwargs xspacing: float of int, spacing for the x labels
+    :kwargs yspacing: float of int, spacing for the y labels
 
     :output: saves images of every section for all list_of_profiles
     """
@@ -82,8 +82,10 @@ def profiles_generator(path_banks, list_of_profiles, header, markersize, marker,
                         markerfacecolor='black', markersize=markersize[i], label=titles[i])
 
                 ax.legend(loc='upper center')
-                ax.xaxis.set_major_locator(ticker.MultipleLocator(xspacing))
-                ax.yaxis.set_major_locator(ticker.MultipleLocator(yspacing))
+                if kwargs.get('xspacing'):
+                    ax.xaxis.set_major_locator(ticker.MultipleLocator(xspacing))
+                if kwargs.get('yspacing'):
+                    ax.yaxis.set_major_locator(ticker.MultipleLocator(yspacing))
 
                 # plt.scatter(references, reference_banks.bedelevation, marker="^", edgecolors='c', label='Stamm Punkte')
                 i += 1
@@ -141,4 +143,4 @@ if __name__ == '__main__':
     # Create folder if it doesnt exist
     Path(output_folder).mkdir(exist_ok=True)
 
-    profiles_generator(bank_limits, profiles, header, markersize, marker, xspacing, yspacing, title_list, output_folder)
+    profiles_generator(bank_limits, profiles, header, markersize, marker, title_list, output_folder, xspacing=xspacing, yspacing=yspacing)
