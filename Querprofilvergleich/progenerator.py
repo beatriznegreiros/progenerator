@@ -17,7 +17,7 @@ def split_float(x):
     return int(before), (int(after) * 10 if len(after) == 1 else int(after))
 
 
-def profiles_generator(path_banks, list_of_profiles, header, markersize, marker, titles, output_folder, **kwargs):
+def profiles_generator(path_banks, list_of_profiles, header, markersize, marker, titles, output_folder, xspacing, yspacing):
     """
     :param path_banks: str, text file in *.csv format, file which delimits the points inside a river profile
     :param list_of_profiles: list of str, text files in *.csv format for the profiles to be generated
@@ -26,8 +26,12 @@ def profiles_generator(path_banks, list_of_profiles, header, markersize, marker,
     :param marker: list of str, markers to the respective profiles
     :param titles: list of str, titles as identifiers for each dataset appering in the plots
     :param output_folder: folder to which save the generated images
-    :kwargs xspacing: float of int, spacing for the x labels
-    :kwargs yspacing: float of int, spacing for the y labels
+    :param xspacing: float or int, spacing for the x labels
+    :param yspacing: float or int, spacing for the y labels
+    #TODO under construction:
+    :kwarg plot_beyond_until: float, distance beyond the most extreme points (right and left bank) of one chosen
+    reference profile ('from_profile') to which plot all points inside it.
+    :kwarg from_profile: str, referred to plot_beyond_until
 
     :output: saves images of every section for all list_of_profiles
     """
@@ -35,6 +39,10 @@ def profiles_generator(path_banks, list_of_profiles, header, markersize, marker,
     corners = pd.read_csv(path_banks, skip_blank_lines=True, index_col=0, header=None)
     corners.dropna(how='any', inplace=True, axis=0)
     corners = rename_columns(corners)  # Standardize columns names
+
+    #TODO
+    '''if kwargs.get('from_file'):
+        from_file = pd.read_csv(from_file, )'''
 
     # Take list of all km sections
     stamm_profiles = corners.index.drop_duplicates()
@@ -65,10 +73,10 @@ def profiles_generator(path_banks, list_of_profiles, header, markersize, marker,
                 distances = (points_in_section.lat ** 2 + points_in_section.long ** 2) ** 0.5
                 references = np.array((reference_banks.lat ** 2 + reference_banks.long ** 2) ** 0.5)
 
-                # Boolean array to take only points inside the stamm punkte
-                isinside = (distances <= references[1]) & (distances >= references[0]) | ((distances <= references[0])
-                                                                                          & (distances >= references[
-                            1]))
+                # Boolean array to take only points inside a certain range of interest
+                isinside = (distances <= references[1]) & (distances >= references[0]) | (
+                            (distances <= references[0])
+                            & (distances >= references[1]))
 
                 # Re-assign dataframes to take only points inside stammpunkte
                 points_in_section = points_in_section[isinside]
@@ -82,10 +90,8 @@ def profiles_generator(path_banks, list_of_profiles, header, markersize, marker,
                         markerfacecolor='black', markersize=markersize[i], label=titles[i])
 
                 ax.legend(loc='upper center')
-                if kwargs.get('xspacing'):
-                    ax.xaxis.set_major_locator(ticker.MultipleLocator(xspacing))
-                if kwargs.get('yspacing'):
-                    ax.yaxis.set_major_locator(ticker.MultipleLocator(yspacing))
+                ax.xaxis.set_major_locator(ticker.MultipleLocator(xspacing))
+                ax.yaxis.set_major_locator(ticker.MultipleLocator(yspacing))
 
                 # plt.scatter(references, reference_banks.bedelevation, marker="^", edgecolors='c', label='Stamm Punkte')
                 i += 1
@@ -126,8 +132,8 @@ if __name__ == '__main__':
     title_list = ['Bed elevation at 2007 (Mesh)', 'Bed elevation at 2007 (Measurements)']
 
     # Spacing for the x labels
-    xspacing = 20  # every 20 m
-    yspacing = 1  # every 1 m
+    del_x = 20  # every 20 m
+    del_y = 1  # every 1 m
 
     # If the .csv files have header, please inser tthe number of header lines
     header = None
@@ -143,4 +149,5 @@ if __name__ == '__main__':
     # Create folder if it doesnt exist
     Path(output_folder).mkdir(exist_ok=True)
 
-    profiles_generator(bank_limits, profiles, header, markersize, marker, title_list, output_folder, xspacing=xspacing, yspacing=yspacing)
+    profiles_generator(bank_limits, profiles, header, markersize, marker, title_list, output_folder, xspacing=del_x,
+                       yspacing=del_y)
