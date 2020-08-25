@@ -1,8 +1,11 @@
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-from pathlib import Path
-import matplotlib.ticker as ticker
+try:
+    import numpy as np
+    import pandas as pd
+    import matplotlib.pyplot as plt
+    from pathlib import Path
+    import matplotlib.ticker as ticker
+except:
+    print('ModuleNotFoundError: Missing fundamental packages (required: numpy, pandas and matplotlib')
 
 
 # Practical Routines
@@ -17,7 +20,8 @@ def split_float(x):
     return int(before), (int(after) * 10 if len(after) == 1 else int(after))
 
 
-def profiles_generator(path_banks, list_of_profiles, header, markersize, marker, titles, output_folder, xspacing, yspacing):
+def profiles_generator(path_banks, list_of_profiles, header, markersize, marker, titles, output_folder, xspacing,
+                       yspacing, only_points_inside=None):
     """
     :param path_banks: str, text file in *.csv format, file which delimits the points inside a river profile
     :param list_of_profiles: list of str, text files in *.csv format for the profiles to be generated
@@ -40,17 +44,15 @@ def profiles_generator(path_banks, list_of_profiles, header, markersize, marker,
     corners.dropna(how='any', inplace=True, axis=0)
     corners = rename_columns(corners)  # Standardize columns names
 
-    #TODO
-    '''if kwargs.get('from_file'):
-        from_file = pd.read_csv(from_file, )'''
-
     # Take list of all km sections
     stamm_profiles = corners.index.drop_duplicates()
 
     # Iterates through km sections
     for sec in stamm_profiles:
         i = 0
-        f, ax = plt.subplots(figsize=(10, 6))
+        f, ax = plt.subplots()
+        ax.xaxis.set_major_locator(ticker.MultipleLocator(xspacing))
+        ax.yaxis.set_major_locator(ticker.MultipleLocator(yspacing))
 
         for _file in list_of_profiles:
 
@@ -75,8 +77,8 @@ def profiles_generator(path_banks, list_of_profiles, header, markersize, marker,
 
                 # Boolean array to take only points inside a certain range of interest
                 isinside = (distances <= references[1]) & (distances >= references[0]) | (
-                            (distances <= references[0])
-                            & (distances >= references[1]))
+                        (distances <= references[0])
+                        & (distances >= references[1]))
 
                 # Re-assign dataframes to take only points inside stammpunkte
                 points_in_section = points_in_section[isinside]
@@ -90,11 +92,11 @@ def profiles_generator(path_banks, list_of_profiles, header, markersize, marker,
                         markerfacecolor='black', markersize=markersize[i], label=titles[i])
 
                 ax.legend(loc='upper center')
-                ax.xaxis.set_major_locator(ticker.MultipleLocator(xspacing))
-                ax.yaxis.set_major_locator(ticker.MultipleLocator(yspacing))
+                #plt.xlim(0, 180)
 
                 # plt.scatter(references, reference_banks.bedelevation, marker="^", edgecolors='c', label='Stamm Punkte')
                 i += 1
+
             except:  # skips the plot if the section doesnt exist
                 message = "Could not save plot for " + _file + " in km section " + str(sec)
                 print(message)
@@ -129,7 +131,7 @@ if __name__ == '__main__':
     bank_limits = str(current_dir) + '/' + 'Inn_Stamm_2014' + '.csv'
 
     # Titles of the legend in the plots
-    title_list = ['Bed elevation at 2007 (Mesh)', 'Bed elevation at 2007 (Measurements)']
+    title_list = ['Bed elevation in 2007 (Mesh)', 'Bed elevation in 2007 (Measurements)']
 
     # Spacing for the x labels
     del_x = 20  # every 20 m
