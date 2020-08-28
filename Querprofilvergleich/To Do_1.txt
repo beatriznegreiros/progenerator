@@ -1,0 +1,54 @@
+Profile (measured) comparison 2007-2014-2020
+To Do:
+
+In general:				- Use the corrected profiles of 2020 (Inn_Querprofile_GKZone4_DHHN12_korr.hip) to replace the old profiles of 2020
+						- Unify the spacing on the vertical and horizontal axis
+						- Create larger images of the diagrams (like e.g. for the comparison of the measured and mesh-profiles of 2007)
+						- It seems like for the first and last point of 2020 in each profile, the elevation of 2014 is taken. This is e.g. very significant in profile 114.2 and 118.2. Please correct that.
+
+99.8:	Profile 2007:	- Delete connection LB/RB
+
+100.6:	Profile 2007:	- Delete 3 Measurement Errors at left bank
+
+100.8:	Profile 2020:	- Most of the profile is missing
+
+101.4:	Profile 2007:	- Some points on the left bank are not included
+
+101.79: Profile 2007:	- Delete points of the bridge measurements
+						- Points on the left are not included (to the left of the last bridge point)
+
+104.08: Profile 2007:	- Delete points of the bridge measurements
+
+106.6:	Profile 2007:	- Points are missing
+
+106.8:	Profile 2007:	- Points are missing (Where the horizontal line is)
+						- Delete 1 false point on the left side
+
+109.75:	Profile 2007:	- Delete connection LB/RB
+
+114.2:	all Profiles:	- Choose a point for the left "Stamm" further left (e.g. where Profile 2014 or 2020 has an elevation of 386 m.a.s.l.)
+
+114.4:	all Profiles:	- Choose a point for the left "Stamm" further left (e.g. where Profile 2014 or 2020 has an elevation of 386 m.a.s.l.)
+
+115.97: Profile 2020:	- Correct the profile
+
+117.08:	Profile 2007:	- Right bank: Delete the points that lead to the "zig-zagging" of the bank (delete the lower points)
+
+122.0:	all Profiles:	- Choose a point for the left "Stamm" further left (e.g. where Profile 2014 or 2020 has an elevation of 395 m.a.s.l.) 
+
+122.06:	Profile 2007:	- Delete points of the bridge measurements
+						- Delete connection LB/RB
+						
+122.4:	Profile 2007: 	- Something is wrong with the elevation (Profile should look similar to the other two profiles, see Grafische_Darstellung_Querprofile.pdf)
+
+124.65:	all Profiles:	- Choose a point for the right "Stamm" further right (e.g. where Profile 2014 or 2020 has an elevation of 396 m.a.s.l.)
+
+124.7:	all Profiles:	- Choose a point for the right "Stamm" further right (e.g. where Profile 2014 or 2020 has an elevation of 396 m.a.s.l.)
+
+125.8:	Profile 2007:	- Fix the errors on the left bank
+
+126.32:	Profile 2007:	- Right bank: Delete the points that lead to the "zig-zagging" of the bank (delete the upper points)
+
+127.23	Profile 2014:	- Check if points are missing on the left bank
+
+127.47: Profile 2007:	- Delete points of the bridge measurements
