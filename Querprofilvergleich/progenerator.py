@@ -54,7 +54,7 @@ def profiles_generator(path_banks, list_of_profiles, header, markersize, marker,
         ax.xaxis.set_major_locator(ticker.MultipleLocator(xspacing))
         ax.yaxis.set_major_locator(ticker.MultipleLocator(yspacing))
         plt.grid(True)
-        
+
         for _file in list_of_profiles:
 
             # Take the Stamm Punkte
