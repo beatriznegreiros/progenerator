@@ -103,12 +103,12 @@ def profiles_generator(path_banks, list_of_profiles, header, markersize, marker,
                     points_in_section = points_in_section[isinside]
 
                 # Calculates the relative distance of the bathymetry having as reference point the left bank
-                plot_distances = abs(((points_in_section.lat - reference_banks['lat'].iloc[0]) ** 2 + (
-                        points_in_section.long - reference_banks['long'].iloc[0]) ** 2) ** 0.5)
+                plot_distances = ((points_in_section.lat - reference_banks['lat'].iloc[0]) ** 2 + (
+                        points_in_section.long - reference_banks['long'].iloc[0]) ** 2) ** 0.5
 
                 # Plots the km section
                 _ = plt.plot(plot_distances, points_in_section.bedelevation, marker=marker[i],
-                        markerfacecolor='black', markersize=markersize[i], label=titles[i])
+                             markersize=markersize[i], label=titles[i])
 
                 plt.legend(loc='upper center')
                 # plt.xlim(0, 180)
@@ -131,9 +131,8 @@ def profiles_generator(path_banks, list_of_profiles, header, markersize, marker,
         out = output_folder + '/' + 'km_' + str(integer) + '_' + str(decimal)
 
         # Save figure
-        plt.savefig(out)
+        plt.savefig(out, dpi=300)
         plt.clf()
-        plt.cla()
 
 
 if __name__ == '__main__':
@@ -163,8 +162,8 @@ if __name__ == '__main__':
     # If the .csv files have header, please inser tthe number of header lines
     header = None
 
-    markersize = [8, 4, 0]  # corresponding to the respective profiles
-    marker = [".", "^", "."]  # corresponding to the respective profiles
+    markersize = [0, 0, 0]  # corresponding to the respective profiles
+    marker = [".", "s", "."]  # corresponding to the respective profiles
 
     # Folder to save all images
     output_folder = str(current_dir) + '/' + 'Inn_Profiles_2014_2007_2020_new'
