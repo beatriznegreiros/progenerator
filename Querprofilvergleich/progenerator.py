@@ -50,9 +50,9 @@ def profiles_generator(path_banks, list_of_profiles, header, markersize, marker,
     # Iterates through km sections
     for sec in stamm_profiles:
         i = 0
-        f, ax = plt.subplots()
-        ax.xaxis.set_major_locator(ticker.MultipleLocator(xspacing))
-        ax.yaxis.set_major_locator(ticker.MultipleLocator(yspacing))
+        #f, ax = plt.subplots()
+        #ax.xaxis.set_major_locator(ticker.MultipleLocator(xspacing))
+        #ax.yaxis.set_major_locator(ticker.MultipleLocator(yspacing))
         plt.grid(True)
 
         for _file in list_of_profiles:
@@ -107,10 +107,10 @@ def profiles_generator(path_banks, list_of_profiles, header, markersize, marker,
                         points_in_section.long - reference_banks['long'].iloc[0]) ** 2) ** 0.5)
 
                 # Plots the km section
-                ax.plot(plot_distances, points_in_section.bedelevation, marker=marker[i],
+                _ = plt.plot(plot_distances, points_in_section.bedelevation, marker=marker[i],
                         markerfacecolor='black', markersize=markersize[i], label=titles[i])
 
-                ax.legend(loc='upper center')
+                plt.legend(loc='upper center')
                 # plt.xlim(0, 180)
 
                 # plt.scatter(references, reference_banks.bedelevation, marker="^", edgecolors='c', label='Stamm Punkte')
@@ -123,16 +123,17 @@ def profiles_generator(path_banks, list_of_profiles, header, markersize, marker,
 
         # Get title and path of the section figure
         integer, decimal = split_float(sec)
-        ax.tick_params(axis='both', labelsize='large')
-        ax.set_xlabel(xlabel='Distance from left bank [m]')
-        ax.set_ylabel(ylabel='Elevation [m.a.s.l]')
+        plt.tick_params(axis='both', labelsize='large')
+        plt.xlabel(xlabel='Distance from left bank [m]')
+        plt.ylabel(ylabel='Elevation [m.a.s.l]')
         # ax.tick_params(axis='x', width=20)
-        ax.set_title(label='Cross section of km ' + str(sec))
+        plt.title(label='Cross section of km ' + str(sec))
         out = output_folder + '/' + 'km_' + str(integer) + '_' + str(decimal)
 
         # Save figure
-        f.savefig(out)
+        plt.savefig(out)
         plt.clf()
+        plt.cla()
 
 
 if __name__ == '__main__':
@@ -142,17 +143,18 @@ if __name__ == '__main__':
 
     # Path for the profiles to be plotted
     # (km section, lat, long, bed elevation) obs.: first column is always 0
-    profiles = [str(current_dir / 'Profiles_Mesh_2007') + '.csv',
-                str(current_dir / 'QP_2007_Fkm') + '.csv'
-                ]
+    profiles = [str(current_dir / 'QP_2007_Fkm') + '.csv',
+                str(current_dir / 'Inn_Profile_2014') + '.csv',
+                str(current_dir / 'Querprofile_2020_final') + '.csv']
 
     # Path to stamm punkte
     # (km section, lat, long, bed elevation) obs.: first column is always 0
     bank_limits = str(current_dir) + '/' + 'Inn_Stamm_2014' + '.csv'
 
     # Titles of the legend in the plots
-    title_list = ['Bed elevation in 2007 (Mesh)',
-                  'Bed elevation in 2007 (Measurements)']
+    title_list = ['Bed elevation in 2007 (Measurements)',
+                  'Bed elevation in 2014 (Measurements)',
+                  'Bed elevation in 2020 (Measurements)']
 
     # Spacing for the x labels
     del_x = 20  # every 20 m
@@ -161,15 +163,15 @@ if __name__ == '__main__':
     # If the .csv files have header, please inser tthe number of header lines
     header = None
 
-    markersize = [8, 4]  # corresponding to the respective profiles
-    marker = [".", "^"]  # corresponding to the respective profiles
+    markersize = [8, 4, 0]  # corresponding to the respective profiles
+    marker = [".", "^", "."]  # corresponding to the respective profiles
 
     # Folder to save all images
-    output_folder = str(current_dir) + '/' + 'Inn_Profiles_2007_mesh_vs_meas_02'
+    output_folder = str(current_dir) + '/' + 'Inn_Profiles_2014_2007_2020_new'
 
     # -------------------------------------------------------------------
 
     # Create folder if it doesnt exist
     Path(output_folder).mkdir(exist_ok=True)
     profiles_generator(bank_limits, profiles, header, markersize, marker, title_list, output_folder, xspacing=del_x,
-                       yspacing=del_y, delete_outside=str(current_dir / 'Profiles_Mesh_2007') + '.csv')
+                       yspacing=del_y)
