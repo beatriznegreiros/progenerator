@@ -2,13 +2,13 @@ Profile (measured) comparison 2007-2014-2020
 To Do:
 
 In general:				- Use the corrected profiles of 2020 (Inn_Querprofile_GKZone4_DHHN12_korr.hip) to replace the old profiles of 2020
-						- Unify the spacing on the vertical and horizontal axis
-						- Create larger images of the diagrams (like e.g. for the comparison of the measured and mesh-profiles of 2007)
-						- It seems like for the first and last point of 2020 in each profile, the elevation of 2014 is taken. This is e.g. very significant in profile 114.2 and 118.2. Please correct that.
+						- Unify the spacing on the vertical and horizontal axis ```working on that```
+						- Create larger images of the diagrams (like e.g. for the comparison of the measured and mesh-profiles of 2007) ```No sure what you mean, do you mean the dpi of the image?```
+						- It seems like for the first and last point of 2020 in each profile, the elevation of 2014 is taken. This is e.g. very significant in profile 114.2 and 118.2. Please correct that. ```The points coincide because the profile from 2020 contains the stammpunkte```
 
 99.8:	Profile 2007:	- Delete connection LB/RB
 
-100.6:	Profile 2007:	- Delete 3 Measurement Errors at left bank
+100.6:	Profile 2007:	- ~~Delete 3 Measurement Errors at left bank~~
 
 100.8:	Profile 2020:	- Most of the profile is missing
 
