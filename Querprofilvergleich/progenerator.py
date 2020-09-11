@@ -50,9 +50,9 @@ def profiles_generator(path_banks, list_of_profiles, header, markersize, marker,
     # Iterates through km sections
     for sec in stamm_profiles:
         i = 0
-        #f, ax = plt.subplots()
-        #ax.xaxis.set_major_locator(ticker.MultipleLocator(xspacing))
-        #ax.yaxis.set_major_locator(ticker.MultipleLocator(yspacing))
+        # f, ax = plt.subplots()
+        # ax.xaxis.set_major_locator(ticker.MultipleLocator(xspacing))
+        # ax.yaxis.set_major_locator(ticker.MultipleLocator(yspacing))
         plt.grid(True)
 
         for _file in list_of_profiles:
@@ -96,9 +96,10 @@ def profiles_generator(path_banks, list_of_profiles, header, markersize, marker,
 
                     isinside = ((distances <= delete[1]) & (distances >= delete[0]) | (
                             (distances <= delete[0])
-                            & (distances >= delete[1]))) & ((distances <= references[1]) & (distances >= references[0]) | (
-                            (distances <= references[0])
-                            & (distances >= references[1])))
+                            & (distances >= delete[1]))) & (
+                                           (distances <= references[1]) & (distances >= references[0]) | (
+                                           (distances <= references[0])
+                                           & (distances >= references[1])))
 
                     points_in_section = points_in_section[isinside]
 
@@ -144,7 +145,7 @@ if __name__ == '__main__':
     # (km section, lat, long, bed elevation) obs.: first column is always 0
     profiles = [str(current_dir / 'QP_2007_Fkm') + '.csv',
                 str(current_dir / 'Inn_Profile_2014') + '.csv',
-                str(current_dir / 'Querprofile_2020_final') + '.csv']
+                str(current_dir / 'Querprofile_2020_korr') + '.csv']
 
     # Path to stamm punkte
     # (km section, lat, long, bed elevation) obs.: first column is always 0
