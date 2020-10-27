@@ -40,3 +40,6 @@ created inside the selected directory.
 Navigate with ``anaconda prompt`` to the the cloned repository and type ``conda env create -f environment.yml`` to create a conda environment with the above necessary packages.
 
 
+### Developed in:
+
+[![Image](Logo_LWW.JPG)](https://www.iws.uni-stuttgart.de/lww/)
