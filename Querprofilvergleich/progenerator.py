@@ -143,18 +143,18 @@ if __name__ == '__main__':
 
     # Path for the profiles to be plotted
     # (km section, lat, long, bed elevation) obs.: first column is always 0
-    profiles = [str(current_dir / 'QP_2007_Fkm') + '.csv',
-                str(current_dir / 'Inn_Profile_2014') + '.csv',
-                str(current_dir / 'Querprofile_2020_korr') + '.csv']
+    profiles = [str(current_dir / 'Profiles_Mesh_2007_new') + '.csv',
+                str(current_dir / 'Profiles_Mesh_2014_new2') + '.csv',
+                str(current_dir / 'Profiles_Kalibrierlauf_88') + '.csv']
 
     # Path to stamm punkte
     # (km section, lat, long, bed elevation) obs.: first column is always 0
     bank_limits = str(current_dir) + '/' + 'Inn_Stamm_2014' + '.csv'
 
     # Titles of the legend in the plots
-    title_list = ['Bed elevation in 2007 (Measurements)',
-                  'Bed elevation in 2014 (Measurements)',
-                  'Bed elevation in 2020 (Measurements)']
+    title_list = ['Bed elevation in 2007 (Mesh)',
+                  'Bed elevation in 2014 (Mesh)',
+                  'Results_88_SCFG7_KR=40']
 
     # Spacing for the x labels
     del_x = 20  # every 20 m
@@ -163,11 +163,11 @@ if __name__ == '__main__':
     # If the .csv files have header, please inser tthe number of header lines
     header = None
 
-    markersize = [0, 0, 0]  # corresponding to the respective profiles
-    marker = [".", "s", "."]  # corresponding to the respective profiles
+    markersize = [6, 6, 3]  # corresponding to the respective profiles
+    marker = [".", ".", "s"]  # corresponding to the respective profiles
 
     # Folder to save all images
-    output_folder = str(current_dir) + '/' + 'Inn_Profiles_2014_2007_2020_new'
+    output_folder = str(current_dir) + '/' + 'Querprofile_Kalibrierlauf_88'
 
     # -------------------------------------------------------------------
 
